@@ -1,0 +1,6 @@
+# Derleme (Build) klasörleri
+bin/
+obj/
+
+# SFML Kütüphane DLL dosyaları
+*.dll
