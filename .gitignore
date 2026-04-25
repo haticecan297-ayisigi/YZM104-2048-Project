@@ -4,3 +4,7 @@ obj/
 
 # SFML Kütüphane DLL dosyaları
 *.dll
+
+*.layout
+*.depend
+*.exe
