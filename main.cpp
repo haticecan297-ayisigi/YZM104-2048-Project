@@ -1,4 +1,5 @@
 #include <SFML/Graphics.hpp>
+using namespace std;
 
 int main() {
     // VideoMode artýk süslü parantez {} ile vektör bekler
