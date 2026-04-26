@@ -6,18 +6,23 @@ using namespace std;
 
 class OyunMantigi {
 private:
-    Kutu tahta[4][4];   // 4x4 oyun alanı
-    int skor;           // Güncel skor
-    bool hareketEttiMi; // Yeni sayı eklenmesi için hareket kontrolü
+    Kutu tahta[4][4];   // 4x4 oyun alanÃ½
+    int skor;           // GÃ¼ncel skor
+    bool hareketEttiMi; // Yeni sayÃ½ eklenmesi iÃ§in hareket kontrolÃ¼
+    void birlestirmeIsaretleriniTemizle() {   // Bir hamlede kalmamasi icin her hamleden sonra tekrar false olmali.
+        for (int i = 0; i < 4; i++)
+            for (int j = 0; j < 4; j++)
+                tahta[i][j].birlestiMi = false;
+    }
 
 public:
     OyunMantigi() {
         skor = 0;
-        srand(time(0)); // Rastgelelik için zamanı başlat
+        srand(time(0)); // Rastgelelik iÃ§in zamanÃ½ baÃ¾lat
         tahtayiSifirla();
     }
 
-    // Oyunu başlatmak için tahtayı temizler ve 2 sayı ekler
+    // Oyunu baÃ¾latmak iÃ§in tahtayÃ½ temizler ve 2 sayÃ½ ekler
     void tahtayiSifirla() {
         for(int i = 0; i < 4; i++) {
             for(int j = 0; j < 4; j++) {
@@ -29,7 +34,7 @@ public:
         rastgeleKutuEkle();
     }
 
-    // Boş bir hücreye %90 ihtimalle 2, %10 ihtimalle 4 ekler
+    // BoÃ¾ bir hÃ¼creye %90 ihtimalle 2, %10 ihtimalle 4 ekler
     void rastgeleKutuEkle() {
         vector<pair<int, int>> bosHucreler;
 
@@ -50,8 +55,42 @@ public:
             tahta[satir][sutun].deger = (rand() % 10 == 0) ? 4 : 2;
         }
     }
+    // Sola KaydÄ±rma Ana Fonksiyonu
+    void solaKaydir() {
+        hareketEttiMi = false;
+        birlestirmeIsaretleriniTemizle();
 
-    // Gerekli getter fonksiyonları (Tahtayı görselleştirmek için)
+        for (int i = 0; i < 4; i++) {         // SÄ±fÄ±r olmayan bir kutu bulup onu hedef haline getiriyoruz.
+            for (int j = 1; j < 4; j++) {
+                if (tahta[i][j].deger != 0) {
+                    int hedefSutun = j;
+
+                    // En sola kadar boÅŸluklarÄ± tara
+                    while (hedefSutun > 0 && tahta[i][hedefSutun - 1].deger == 0) {
+                        tahta[i][hedefSutun - 1].deger = tahta[i][hedefSutun].deger;
+                        tahta[i][hedefSutun].deger = 0;
+                        hedefSutun--;
+                        hareketEttiMi = true;
+                    }//Birlesebilecegi bir sayi yoksa bos olan soldaki en son kutuda kaliyor.
+
+                    // BirleÅŸtirme kontrolÃ¼
+                    if (hedefSutun > 0 &&
+                        tahta[i][hedefSutun - 1].deger == tahta[i][hedefSutun].deger &&   // Bir kerede birden fazla birlesmemesi icin false olmali.
+                        !tahta[i][hedefSutun - 1].birlestiMi) {
+
+                        tahta[i][hedefSutun - 1].deger *= 2;
+                        skor += tahta[i][hedefSutun - 1].deger;
+                        tahta[i][hedefSutun - 1].birlestiMi = true;
+                        tahta[i][hedefSutun].deger = 0;
+                        hareketEttiMi = true;
+                    }
+                }
+            }
+        }
+        if (hareketEttiMi) rastgeleKutuEkle();   // Her hamlede bos kutulardan birine 2 veya 4 gelmeli.
+    }
+
+    // Gerekli getter fonksiyonlarÃ½ (TahtayÃ½ gÃ¶rselleÃ¾tirmek iÃ§in)
     int degerAl(int satir, int sutun) const { return tahta[satir][sutun].deger; }
     int skorAl() const { return skor; }
 };
