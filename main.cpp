@@ -1,18 +1,19 @@
 #include <SFML/Graphics.hpp>
-using namespace std;
+#include "OyunMantigi.hpp"
+
 
 int main() {
-    // VideoMode artýk süslü parantez {} ile vektör bekler
+    // VideoMode artÄ±k sÃ¼slÃ¼ parantez {} ile vektÃ¶r bekler
     sf::RenderWindow window(sf::VideoMode({800, 600}), "SFML 3.0 Test");
 
     sf::CircleShape shape(100.f);
     shape.setFillColor(sf::Color::Green);
 
-    // HATA ALDIÐIN YER: setPosition artýk ({x, y}) þeklinde yazýlmalý
+    // HATA ALDIÄžIN YER: setPosition artÄ±k ({x, y}) ÅŸeklinde yazÄ±lmalÄ±
     shape.setPosition({300.f, 200.f});
 
     while (window.isOpen()) {
-        // SFML 3.0'da pollEvent kullanýmý da deðiþti (Opsiyonel ama önerilen)
+        // SFML 3.0'da pollEvent kullanÄ±mÄ± da deÄŸiÅŸti (Opsiyonel ama Ã¶nerilen)
         while (const std::optional event = window.pollEvent()) {
             if (event->is<sf::Event::Closed>()) {
                 window.close();
