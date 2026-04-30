@@ -41,8 +41,18 @@
 		</Build>
 		<Compiler>
 			<Add option="-Wall" />
+			<Add option="-std=c++17" />
 			<Add option="-fexceptions" />
+			<Add directory="C:/SFML2/SFML-3.1.0/include" />
 		</Compiler>
+		<Linker>
+			<Add library="C:/SFML2/SFML-3.1.0/lib/libsfml-audio.a" />
+			<Add library="C:/SFML2/SFML-3.1.0/lib/libsfml-graphics.a" />
+			<Add library="C:/SFML2/SFML-3.1.0/lib/libsfml-system.a" />
+			<Add library="C:/SFML2/SFML-3.1.0/lib/libsfml-window.a" />
+			<Add library="C:/SFML2/SFML-3.1.0/lib/libsfml-network.a" />
+			<Add directory="C:/SFML2/SFML-3.1.0/lib" />
+		</Linker>
 		<Unit filename="main.cpp" />
 		<Extensions />
 	</Project>

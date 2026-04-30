@@ -6,9 +6,9 @@ using namespace std;
 
 class OyunMantigi {
 private:
-    Kutu tahta[4][4];   // 4x4 oyun alaný
-    int skor;           // Güncel skor
-    bool hareketEttiMi; // Yeni sayý eklenmesi için hareket kontrolü
+    Kutu tahta[4][4];   // 4x4 oyun alani
+    int skor;           // Guncel skor
+    bool hareketEttiMi; // Yeni sayi eklenmesi icin hareket kontrolu
     void birlestirmeIsaretleriniTemizle() {   // Bir hamlede kalmamasi icin her hamleden sonra tekrar false olmali.
         for (int i = 0; i < 4; i++)
             for (int j = 0; j < 4; j++)
@@ -18,7 +18,7 @@ private:
 public:
     OyunMantigi() {
         skor = 0;
-        srand(time(0)); // Rastgelelik için zamaný baþlat
+        srand(time(0)); // Rastgelelik için zamani baslat
         tahtayiSifirla();
     }
 
@@ -60,7 +60,7 @@ public:
         hareketEttiMi = false;
         birlestirmeIsaretleriniTemizle();
 
-        for (int i = 0; i < 4; i++) {         // Sıfır olmayan bir kutu bulup onu hedef haline getiriyoruz.
+        for (int i = 0; i < 4; i++) {         // Sifir olmayan bir kutu bulup onu hedef haline getiriyoruz.
             for (int j = 1; j < 4; j++) {
                 if (tahta[i][j].deger != 0) {
                     int hedefSutun = j;
@@ -90,7 +90,7 @@ public:
         if (hareketEttiMi) rastgeleKutuEkle();   // Her hamlede bos kutulardan birine 2 veya 4 gelmeli.
     }
 
-    // SAĞA KAYDIRMA: sagdan sola dogu kontrol et
+    // SAGA KAYDIRMA: sagdan sola dogu kontrol et
     void sagaKaydir() {
         hareketEttiMi = false;
         birlestirmeIsaretleriniTemizle();
@@ -174,4 +174,22 @@ public:
     // Gerekli getter fonksiyonlari (Tahtayi görsellestirmek icin)
     int degerAl(int satir, int sutun) const { return tahta[satir][sutun].deger; }
     int skorAl() const { return skor; }
+
+    //Sayilara gore bulundugu kutunun rengi vektorel olarak degismesi icin.
+    sf::Color renkAl(int deger) {
+    switch (deger) {
+        case 2:    return sf::Color(238, 228, 218);    //Kirli Beyaz
+        case 4:    return sf::Color(237, 224, 200);    //Krem
+        case 8:    return sf::Color(242, 177, 121);    //Acik Turuncu
+        case 16:   return sf::Color(245, 149, 99);     //Koyu Turuncu
+        case 32:   return sf::Color(246, 124, 95);     //Mercan
+        case 64:   return sf::Color(246, 94, 59);      //Parlak Kirmizi
+        case 128:  return sf::Color(237, 207, 114);    //Parlak Sari
+        case 256:  return sf::Color(237, 204, 97);     //Altın Sarisi
+        case 512:  return sf::Color(237, 200, 80);     //Gunes Sarisi
+        case 1024: return sf::Color(237, 197, 63);     //Limon Sarisi
+        case 2048: return sf::Color(237, 194, 46);     //Ozel Altin
+        default:   return sf::Color(205, 193, 180);    // Boş kutu rengi bej
+    }
+}
 };

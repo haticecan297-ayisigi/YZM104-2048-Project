@@ -539,6 +539,18 @@
 	<string_view>
 	<cstdint>
 
-1777037649 source:c:\users\huawei\onedrive\masaüstü\programlama_2048-oyunu\main.cpp
+1777483749 source:c:\users\huawei\onedrive\masaüstü\programlama_2048-oyunu\main.cpp
 	<SFML/Graphics.hpp>
+	"OyunMantigi.hpp"
+	<string>
+	<iostream>
+	<optional>
+
+1777408378 c:\users\huawei\onedrive\masaüstü\programlama_2048-oyunu\oyunmantigi.hpp
+	<vector>
+	<ctime>
+	<cstdlib>
+	"Kutu.hpp"
+
+1777154227 c:\users\huawei\onedrive\masaüstü\programlama_2048-oyunu\kutu.hpp
 
